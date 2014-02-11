@@ -40,11 +40,12 @@
 -(void) deposit:(NSString *)balance
 {
     NSLog(@"HERE WE ARE");
-    NSString *update = balance;
-    BankViewController *bvc;
+    NSString *update;
+    update = balance;
+    BankViewController *bvc = [[BankViewController alloc] init];
     [bvc addItem:update];
 
-    NSLog(@"%@", balance);
+    NSLog(@"%@", update);
 }
      
 -(void) withdraw:(NSString *)balance

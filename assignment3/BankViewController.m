@@ -51,12 +51,14 @@
     NSLog(@"YEEEHAWWW AMERICAN BADASS");
     //int newRowIndex = [ items count ];
     // add a new item to our list ( model )
-    TransactionItem * item = [[ TransactionItem alloc ] init ];
+    TransactionItem *item = [[ TransactionItem alloc ] init ];
     item.text = update;
+    NSLog(@"%@", item);
     [items addObject:item];
+    NSLog(@"%@", items);
     
     // update the frickin model
-    [self.tableView reloadData ];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad
@@ -64,13 +66,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //TransactionItem *item;
+    TransactionItem *item;
     items = [[NSMutableArray alloc] initWithCapacity:100];
-    /*for(int i=0; i<105; i++){
+    for(int i=0; i<105; i++){
         item = [[TransactionItem alloc] init];
         item.text = [NSString stringWithFormat:@"I'm cell %d", i];
         [items addObject:item];
-    }*/
+    }
     
 }
 
