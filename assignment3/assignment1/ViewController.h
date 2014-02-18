@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "BankAccount.h"
 #import "BankViewController.h"
-#import "TransactionItem.h"
 
+
+@class BankAccount;
 @interface ViewController : UIViewController <UIScrollViewDelegate>{
     BOOL keyboardIsShown;
 }
@@ -22,5 +23,8 @@
 
 - (IBAction)makeDeposit:(id)sender;
 - (IBAction)makeWithdraw:(id)sender;
+-(NSString *)documentsDirectory;
+-(NSString *)dataFilePath;
+-(void) saveBankAccount;
 
 @end

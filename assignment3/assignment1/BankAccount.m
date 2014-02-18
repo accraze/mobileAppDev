@@ -27,6 +27,25 @@
     return _transactionList;
 }
 
+#pragma mark - NSCoding Protocol
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.transactionList forKey:@"transactionList"];
+    [aCoder encodeObject:self.accountIdentifier forKey:@"accountIdentifier"];
+    [aCoder encodeDouble:self.balance forKey:@"balance"];
+}
+
+// I change to this format. John
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super init])){
+        self.transactionList = [aDecoder decodeObjectForKey:@"transactionList"];
+        self.accountIdentifier = [aDecoder decodeObjectForKey:@"accountName"];
+        self.balance = [aDecoder decodeDoubleForKey:@"balance"];
+    }
+    return self;
+}
+
 // initialized in the init because that's what I showed you in class
 // if we init here we should not need to instantiate lazily
 -(id) init
@@ -34,28 +53,57 @@
     self = [super init];
     self.transactionList = [[NSMutableArray alloc] init];
     self.balance = 0.00;
+    self.accountIdentifier = @"Mayor Rob Ford";
     return self;
 }
 
--(void) deposit:(NSString *)balance
+-(BOOL) deposit:(double)balance
 {
-    NSLog(@"HERE WE ARE");
     NSString *update;
-    update = balance;
-    BankViewController *bvc = [[BankViewController alloc] init];
-    [bvc addItem:update];
-
-    NSLog(@"%@", update);
+    if(balance > 0) {
+        NSLog(@"Depositing...");
+        self.balance += balance;
+        update = [NSString stringWithFormat:@"Deposit $%.2f at %@", balance, [self whatDaTime]];
+        [(NSMutableArray *)self.transactionList addObject:update];
+        NSLog(@"%@", update);
+        return YES;
+    } else {
+        update =[NSString stringWithFormat:@"Error!! cannot deposit: $%.2f - %@", balance, [self whatDaTime]];
+        [(NSMutableArray *)self.transactionList addObject:update];
+        return NO;
+    }
 }
-     
--(void) withdraw:(NSString *)balance
+
+-(BOOL) withdraw:(double)balance
 {
-    TransactionItem *item;
-    item = [[TransactionItem alloc] init];
-    item.text = [NSString stringWithFormat:@"Withdraw: $%@", balance];
-    [self.transactionList addObject:item];
-    //[self.transactionList addObject:balance];
-    NSLog(@"Withdraw: $%@", balance);
+    NSString *update;
+    if(balance <= self.balance && balance > 0) {
+        NSLog(@"Withdrawing...");
+        self.balance -= balance;
+        update = [NSString stringWithFormat:@"Withdraw $%.2f at %@", balance, [self whatDaTime]];
+        [(NSMutableArray *)self.transactionList addObject:update];
+        NSLog(@"%@", update);
+        return YES;
+    } else {
+        update =[NSString stringWithFormat:@"Error!! Insufficient Funds"];
+        [(NSMutableArray *)self.transactionList addObject:update];
+        return NO;
+    }
+}
+
+-(NSString *)whatDaTime {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"h:mm a";
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    NSDate *today = [NSDate date];
+    return [dateFormatter stringFromDate:today];
+}
+
+
+-(NSString *)description
+{
+    NSString *temp = self.transactionList.description;
+    return temp;
 }
 
 

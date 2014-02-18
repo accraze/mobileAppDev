@@ -8,16 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "BankViewController.h"
-#import "TransactionItem.h"
 
-@interface BankAccount : NSObject<NSCoding>
+@interface BankAccount : NSObject <NSCoding>
 //don't let people set our array property, because it is ours
 @property (nonatomic, strong) NSMutableArray *transactionList;
 @property (nonatomic) double balance;
-//@property (nonatomic) BankViewController *vc;
+@property (nonatomic) NSString *accountIdentifier;
 
 
--(void) deposit:(NSString *)balance;
--(void) withdraw:(NSString *)balance;
+
+-(BOOL) deposit:(double)balance;
+-(BOOL) withdraw:(double)balance;
+-(NSString *)whatDaTime;
 
 @end

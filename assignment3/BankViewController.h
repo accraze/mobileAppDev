@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BankAccount.h"
-#import "TransactionItem.h"
 
-@interface BankViewController : UITableViewController // add Table
-//@property (strong, nonatomic) BankAccount *model;
--(void)addItem:(NSString *)update;
 
+@class BankAccount;
+@interface BankViewController :  UITableViewController<UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) BankAccount *model;
 @end

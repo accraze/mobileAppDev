@@ -8,72 +8,23 @@
 
 #import "BankViewController.h"
 
-@interface BankViewController () {
-    NSMutableArray *items;
-}
+@interface BankViewController ()
 @end
 
 @implementation BankViewController
 
-- (NSInteger) numberOfSectionsInTableView :(UITableView *) tableView
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    // we only have a single section
-    return 1;
-}
-- (NSInteger) tableView :(UITableView *) tableView numberOfRowsInSection :(NSInteger) section
-{
-    
-    return [items count];
-}
-
-- ( UITableViewCell *) tableView :( UITableView *) tableView
-           cellForRowAtIndexPath :( NSIndexPath *) indexPath
-{
-    UITableViewCell * cell = [ tableView dequeueReusableCellWithIdentifier : @"TransactionItem" ];
-    
-    TransactionItem *item = [items objectAtIndex:indexPath.row];
-    UILabel * label = ( UILabel *) [ cell viewWithTag :1337];
-    label.text = item.text;
-    return cell;
-}
-
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
     }
     return self;
 }
 
--(void)addItem:(NSString *) update {
-    NSLog(@"YEEEHAWWW AMERICAN BADASS");
-    //int newRowIndex = [ items count ];
-    // add a new item to our list ( model )
-    TransactionItem *item = [[ TransactionItem alloc ] init ];
-    item.text = update;
-    NSLog(@"%@", item);
-    [items addObject:item];
-    NSLog(@"%@", items);
-    
-    // update the frickin model
-    [self.tableView reloadData];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    TransactionItem *item;
-    items = [[NSMutableArray alloc] initWithCapacity:100];
-    for(int i=0; i<105; i++){
-        item = [[TransactionItem alloc] init];
-        item.text = [NSString stringWithFormat:@"I'm cell %d", i];
-        [items addObject:item];
-    }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,6 +32,39 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [self.model.transactionList count];
+    
+}
+
+// fill up the uitable with array strings
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"identifier"];
+    
+    cell.textLabel.text = [self.model.transactionList objectAtIndex:indexPath.row];
+    
+    
+    if ([cell.textLabel.text hasPrefix:@"E"]){
+        cell.imageView.image = [UIImage imageNamed:@"redx.jpg"];
+    }
+    else
+        cell.imageView.image = [UIImage imageNamed:@"money.jpg"];
+    
+    return cell;
+}
+
 
 @end
 

@@ -48,11 +48,11 @@
 		9DA76EC51896C6E50080C599 /* assignment1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "assignment1-Prefix.pch"; sourceTree = "<group>"; };
 		9DA76EC61896C6E50080C599 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9DA76EC71896C6E50080C599 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9DA76ECA1896C6E50080C599 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		9DA76ECA1896C6E50080C599 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		9DA76ECF1896C6E50080C599 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9DA76ED01896C6E50080C599 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9DA76ED21896C6E50080C599 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9DA76ED81896C6E50080C599 /* assignment1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = assignment1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DA76ED21896C6E50080C599 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images.xcassets; sourceTree = "<group>"; };
+		9DA76ED81896C6E50080C599 /* assignment1Tests */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = assignment1Tests; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA76ED91896C6E50080C599 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		9DA76EE11896C6E50080C599 /* assignment1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "assignment1Tests-Info.plist"; sourceTree = "<group>"; };
 		9DA76EE31896C6E50080C599 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				9DA76EB41896C6E50080C599 /* assignment1.app */,
-				9DA76ED81896C6E50080C599 /* assignment1Tests.xctest */,
+				9DA76ED81896C6E50080C599 /* assignment1Tests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,7 +197,7 @@
 			);
 			name = assignment1Tests;
 			productName = assignment1Tests;
-			productReference = 9DA76ED81896C6E50080C599 /* assignment1Tests.xctest */;
+			productReference = 9DA76ED81896C6E50080C599 /* assignment1Tests */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -216,7 +216,6 @@
 			};
 			buildConfigurationList = 9DA76EAF1896C6E50080C599 /* Build configuration list for PBXProject "assignment1" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,

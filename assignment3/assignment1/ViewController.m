@@ -35,37 +35,70 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+#pragma mark - Path information
+- (NSString *)documentsDirectory
+{
+    return [@"~/Documents" stringByExpandingTildeInPath];
+}
+- (NSString *)dataFilePath
+{
+    NSLog(@"%@",[self documentsDirectory]);
+    return [[self documentsDirectory] stringByAppendingPathComponent:@"BankAccount.plist"];
+    
+}
+
+- (void) saveBankAccount
+{
+    // create a generic data storage object
+    NSMutableData * data = [[ NSMutableData alloc ] init ];
+    // tell the archiver to use the storage we jut allocated , the archiver will do the
+    // encoding steps and then write the result into that data object
+    NSKeyedArchiver * archiver = [[ NSKeyedArchiver alloc ] initForWritingWithMutableData : data ];
+    // encode our items array and just with all dictionaries we need a key
+    // the key is just an identifier for the data , that way when we ask
+    // for " ChecklistItems " later the system is able to retrieve it for us
+    [ archiver encodeObject : self.model forKey :@"BankAccountData"];
+    // this is an important step to say that we are done adding items to encode
+    // and we want the data to be encoded now
+    // the archiver waits until it is finished so it is able to get the most efficient encoding of the data
+    [ archiver finishEncoding ];
+    [ data writeToFile :[ self dataFilePath ] atomically : YES ];
+}
+
+- (void) loadBankAccount
+{
+    // get our data file path
+    NSString * path = [ self dataFilePath ];
+    // do we have anything in our documents directory ? If we have anything then load it up
+    if ([[ NSFileManager defaultManager ] fileExistsAtPath : path ]) {
+        // same way , except this time since we aren 't adding anything to our data
+        // we don 't need mutable data , just what we are loading
+        NSData * data = [[ NSData alloc ] initWithContentsOfFile : path ];
+        // make an unarchiver , and point it to our data
+        NSKeyedUnarchiver * unarchiver = [[ NSKeyedUnarchiver alloc ] initForReadingWithData : data ];
+        // We would like to unarchive the " BankAccountData " key and get a reference to it
+        self.model = [unarchiver decodeObjectForKey:@"BankAccountData"];
+        // we 've finished choosing keys that we want , unpack them !
+        [ unarchiver finishDecoding ];
+    }
+    // if not then we 'll just make a new storage
+    else
+    {
+        self.model = [[BankAccount alloc] init];
+    }
+}
+
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-//    self.balance = 0.00;
-//    [self.balanceLabel setText:[NSString stringWithFormat:@"Balance %f", self.balance]];
     
-    // register for keyboard notifications (on show)
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:self.view.window];
-    // register for keyboard notifications (on hide)
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:self.view.window];
-    
-    //instance variable (declared in the header interface) to track if the keyboard is shown
-    // without this the view can skip around
-    keyboardIsShown = NO;
-    
-    //make contentSize bigger than your scrollSize (you will need to figure out for your own use case)
-    CGSize scrollContentSize = CGSizeMake(250, 500); //CGSizeMake(320, 800);
-    self.scrollView.contentSize = scrollContentSize;
-    
-    //cause the keyboard to hide when the scrollview is tapped outside of a button/field
-    UITapGestureRecognizer *tapScroll = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapped)];
-    tapScroll.cancelsTouchesInView = NO;
-    [self.scrollView addGestureRecognizer:tapScroll];
+    self.textField.keyboardType = UIKeyboardTypeNumberPad;
+    [self loadBankAccount];
+    NSLog ( @"%@" ,[ self dataFilePath ]) ;
+    // update text to reflect current balance
+    [self updateLabel];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -115,7 +148,7 @@
 - (void)keyboardWillShow:(NSNotification *)n
 {
     NSLog(@"KeyboardWillShow!");
-    // This is an ivar I'm using to ensure that we do not do the frame size adjustment on the `UIScrollView` if the keyboard is already shown.  This can happen if the user, after fixing editing a `UITextField`, scrolls the resized `UIScrollView` to another `UITextField` and attempts to edit the next `UITextField`.  If we were to resize the `UIScrollView` again, it would be disastrous.  NOTE: The keyboard notification will fire even when the keyboard is already shown.
+    
     if (keyboardIsShown) {
         return;
     }
@@ -150,44 +183,37 @@
 
 // this is the method our button calls
 - (IBAction)makeDeposit:(id)sender {
-    // ask our data model to insert a new name
-    double deposit_amount = [self.textField.text doubleValue];
-    self.model.balance += deposit_amount;
-    [self updateLabel];
-    NSString *transaction = [NSString stringWithFormat: @"Deposit: $%@",
-                            self.textField.text];
-    [self.model deposit: transaction];
+    double balance = [self.textField.text doubleValue];
+    if ([self.model deposit:(balance)]) {
+        [self updateLabel];
+    }
+    //then save the data
+    [self saveBankAccount];
     
 }
 
 - (IBAction)makeWithdraw:(id)sender {
-    double current_balance = self.model.balance;
-    if (current_balance > 0.00){
-        // ask our data model to insert a new name
-        double withdraw_amount = [self.textField.text doubleValue];
-        self.model.balance = current_balance - withdraw_amount;
+    double balance = [self.textField.text doubleValue];
+    if ([self.model withdraw:(balance)]) {
         [self updateLabel];
-        NSString *transaction = [NSString stringWithFormat: @"Withdraw: $%@",
-                                 self.textField.text];
-        [self.model withdraw: transaction];
-    } else {
-        NSLog(@"ERROR! Insufficient Funds... please add more money to your account");
     }
-    
+    //then save the data
+    [self saveBankAccount];
+
 }
 
 -(void) updateLabel {
-    [ self.balanceLabel setText : [ NSString stringWithFormat :@"Balance $ %f" , self.model.balance ]] ;
+    [ self.balanceLabel setText : [ NSString stringWithFormat :@"Balance $ %.2f" , self.model.balance]] ;
 }
 
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ( [segue.identifier isEqualToString:@"SegueToList"])
-//    {
-//        BankViewController *nextVC = segue.destinationViewController;
-//        nextVC.model = self.model;
-//    }
-//}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ( [segue.identifier isEqualToString:@"SegueToList"])
+    {
+        BankViewController *nextVC = segue.destinationViewController;
+        nextVC.model = self.model;
+    }
+}
 
 // this is the "action" portion of our target-action attached by the gesture recognizer
 -(void)tapped

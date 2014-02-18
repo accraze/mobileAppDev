@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D02982118B2E2DA0092F7B2 /* BankAccount.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D02982018B2E2DA0092F7B2 /* BankAccount.plist */; };
+		9D02982318B2E3E30092F7B2 /* redx.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D02982218B2E3E30092F7B2 /* redx.jpg */; };
 		9D50AB7218A84D9800308462 /* coin-us-dollar-iconMD.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D50AB6F18A84D9800308462 /* coin-us-dollar-iconMD.png */; };
 		9D50AB7318A84D9800308462 /* coin-us-dollar-iconSM.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D50AB7018A84D9800308462 /* coin-us-dollar-iconSM.png */; };
 		9D50AB7418A84D9800308462 /* coin-us-dollar-iconLG.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D50AB7118A84D9800308462 /* coin-us-dollar-iconLG.png */; };
@@ -27,7 +29,7 @@
 		9DA76EE41896C6E50080C599 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DA76EE21896C6E50080C599 /* InfoPlist.strings */; };
 		9DA76EE61896C6E50080C599 /* assignment1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA76EE51896C6E50080C599 /* assignment1Tests.m */; };
 		9DA76EF11896D05B0080C599 /* BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA76EF01896D05B0080C599 /* BankAccount.m */; };
-		9DAE1C6218A82A16003E558E /* TransactionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DAE1C6118A82A16003E558E /* TransactionItem.m */; };
+		9DBCDBA718B1727A0078384B /* money.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DBCDBA618B1727A0078384B /* money.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D02982018B2E2DA0092F7B2 /* BankAccount.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = BankAccount.plist; sourceTree = "<group>"; };
+		9D02982218B2E3E30092F7B2 /* redx.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = redx.jpg; sourceTree = "<group>"; };
 		9D50AB6F18A84D9800308462 /* coin-us-dollar-iconMD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coin-us-dollar-iconMD.png"; sourceTree = "<group>"; };
 		9D50AB7018A84D9800308462 /* coin-us-dollar-iconSM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coin-us-dollar-iconSM.png"; sourceTree = "<group>"; };
 		9D50AB7118A84D9800308462 /* coin-us-dollar-iconLG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coin-us-dollar-iconLG.png"; sourceTree = "<group>"; };
@@ -69,8 +73,7 @@
 		9DA76EE51896C6E50080C599 /* assignment1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = assignment1Tests.m; sourceTree = "<group>"; };
 		9DA76EEF1896D05B0080C599 /* BankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAccount.h; sourceTree = "<group>"; };
 		9DA76EF01896D05B0080C599 /* BankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankAccount.m; sourceTree = "<group>"; };
-		9DAE1C6018A82A16003E558E /* TransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionItem.h; sourceTree = "<group>"; };
-		9DAE1C6118A82A16003E558E /* TransactionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionItem.m; sourceTree = "<group>"; };
+		9DBCDBA618B1727A0078384B /* money.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = money.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +136,6 @@
 				9DA76EC61896C6E50080C599 /* AppDelegate.h */,
 				9DA76EC71896C6E50080C599 /* AppDelegate.m */,
 				9DA76EC91896C6E50080C599 /* Main_iPhone.storyboard */,
-				9DAE1C6018A82A16003E558E /* TransactionItem.h */,
-				9DAE1C6118A82A16003E558E /* TransactionItem.m */,
 				9DA76EEF1896D05B0080C599 /* BankAccount.h */,
 				9DA76EF01896D05B0080C599 /* BankAccount.m */,
 				9DA390B11899722200EED56A /* BankViewController.h */,
@@ -152,6 +153,9 @@
 		9DA76EBE1896C6E50080C599 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9D02982218B2E3E30092F7B2 /* redx.jpg */,
+				9D02982018B2E2DA0092F7B2 /* BankAccount.plist */,
+				9DBCDBA618B1727A0078384B /* money.jpg */,
 				9D50AB6F18A84D9800308462 /* coin-us-dollar-iconMD.png */,
 				9D50AB7018A84D9800308462 /* coin-us-dollar-iconSM.png */,
 				9D50AB7118A84D9800308462 /* coin-us-dollar-iconLG.png */,
@@ -258,8 +262,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D50AB7418A84D9800308462 /* coin-us-dollar-iconLG.png in Resources */,
+				9DBCDBA718B1727A0078384B /* money.jpg in Resources */,
 				9D50AB7218A84D9800308462 /* coin-us-dollar-iconMD.png in Resources */,
 				9DA76ED31896C6E50080C599 /* Images.xcassets in Resources */,
+				9D02982118B2E2DA0092F7B2 /* BankAccount.plist in Resources */,
+				9D02982318B2E3E30092F7B2 /* redx.jpg in Resources */,
 				9D50AB7318A84D9800308462 /* coin-us-dollar-iconSM.png in Resources */,
 				9DA76ECB1896C6E50080C599 /* Main_iPhone.storyboard in Resources */,
 				9DA76EC21896C6E50080C599 /* InfoPlist.strings in Resources */,
@@ -287,7 +294,6 @@
 				9DA76EC81896C6E50080C599 /* AppDelegate.m in Sources */,
 				9DA76EC41896C6E50080C599 /* main.m in Sources */,
 				9DA390B31899722200EED56A /* BankViewController.m in Sources */,
-				9DAE1C6218A82A16003E558E /* TransactionItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
