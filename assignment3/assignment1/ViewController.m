@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  assignment1
+//  assignment3
 //
 //  Created by acraze on 1/27/14.
 //  Copyright (c) 2014 acraze. All rights reserved.
@@ -17,7 +17,7 @@
 
 @implementation ViewController
 
-// lazy-instantiating getter method, we didn't show this in class but it should be readable
+// lazy-instantiating getter method
 -(BankAccount *)model
 {
     //if we aren't pointing to an object then make it
@@ -49,39 +49,25 @@
 
 - (void) saveBankAccount
 {
-    // create a generic data storage object
+    
     NSMutableData * data = [[ NSMutableData alloc ] init ];
-    // tell the archiver to use the storage we jut allocated , the archiver will do the
-    // encoding steps and then write the result into that data object
     NSKeyedArchiver * archiver = [[ NSKeyedArchiver alloc ] initForWritingWithMutableData : data ];
-    // encode our items array and just with all dictionaries we need a key
-    // the key is just an identifier for the data , that way when we ask
-    // for " ChecklistItems " later the system is able to retrieve it for us
     [ archiver encodeObject : self.model forKey :@"BankAccountData"];
-    // this is an important step to say that we are done adding items to encode
-    // and we want the data to be encoded now
-    // the archiver waits until it is finished so it is able to get the most efficient encoding of the data
     [ archiver finishEncoding ];
     [ data writeToFile :[ self dataFilePath ] atomically : YES ];
 }
 
 - (void) loadBankAccount
 {
-    // get our data file path
     NSString * path = [ self dataFilePath ];
-    // do we have anything in our documents directory ? If we have anything then load it up
-    if ([[ NSFileManager defaultManager ] fileExistsAtPath : path ]) {
-        // same way , except this time since we aren 't adding anything to our data
-        // we don 't need mutable data , just what we are loading
-        NSData * data = [[ NSData alloc ] initWithContentsOfFile : path ];
-        // make an unarchiver , and point it to our data
+        if ([[ NSFileManager defaultManager ] fileExistsAtPath : path ]) {
+                NSData * data = [[ NSData alloc ] initWithContentsOfFile : path ];
+        
         NSKeyedUnarchiver * unarchiver = [[ NSKeyedUnarchiver alloc ] initForReadingWithData : data ];
-        // We would like to unarchive the " BankAccountData " key and get a reference to it
         self.model = [unarchiver decodeObjectForKey:@"BankAccountData"];
-        // we 've finished choosing keys that we want , unpack them !
         [ unarchiver finishDecoding ];
     }
-    // if not then we 'll just make a new storage
+    // if no saved data is available then re-allocate bank account
     else
     {
         self.model = [[BankAccount alloc] init];

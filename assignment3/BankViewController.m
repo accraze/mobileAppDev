@@ -1,6 +1,6 @@
 //
 //  BankViewController.m
-//  assignment1
+//  assignment3
 //
 //  Created by acraze on 1/29/14.
 //  Copyright (c) 2014 acraze. All rights reserved.
@@ -55,12 +55,12 @@
     
     cell.textLabel.text = [self.model.transactionList objectAtIndex:indexPath.row];
     
-    
+    // changes cell image view depending on type of transaction
     if ([cell.textLabel.text hasPrefix:@"E"]){
-        cell.imageView.image = [UIImage imageNamed:@"redx.jpg"];
+        cell.imageView.image = [UIImage imageNamed:@"redx.jpg"]; // insufficient funds or error
     }
     else
-        cell.imageView.image = [UIImage imageNamed:@"money.jpg"];
+        cell.imageView.image = [UIImage imageNamed:@"money.jpg"]; // monetary transaction
     
     return cell;
 }

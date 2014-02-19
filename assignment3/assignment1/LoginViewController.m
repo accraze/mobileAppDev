@@ -1,6 +1,6 @@
 //
 //  LoginViewController.m
-//  assignment1
+//  assignment3
 //
 //  Created by acraze on 2/9/14.
 //  Copyright (c) 2014 acraze. All rights reserved.
@@ -14,8 +14,9 @@
 
 @implementation LoginViewController
 
+// ensures that the user will UP-Swipe in order to log in
 -(IBAction)handleSwipe:(UISwipeGestureRecognizer *)recognizer{
-    
+    // look for up swipe
     if (recognizer.direction == UISwipeGestureRecognizerDirectionUp) {
         [self performSegueWithIdentifier: @"loginSegue" sender: self];
     }
